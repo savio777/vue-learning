@@ -22,8 +22,8 @@ watch(count, (newValue) => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-2 items-center justify-center h-full">
-    <h1 class="text-2xl font-bold">Counter: {{ count }}</h1>
+  <div class="flex flex-col gap-2 items-center justify-center">
+    <h1 v-if="count > 0" class="text-2xl font-bold">Counter: {{ count }}</h1>
     <input type="number" v-model="count" class="p-2 border rounded" />
     <button class="p-2 bg-blue-500 text-white rounded" @click="count++">
       Increment
