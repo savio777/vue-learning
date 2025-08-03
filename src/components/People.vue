@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faTrash, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+
+import PeopleItem from "./PeopleItem.vue";
 
 const list = ref<{ name: string; age: number }[]>([]);
 
@@ -62,16 +64,12 @@ const listFiltered = computed(() => {
       v-if="list.length"
       class="flex flex-col gap-2 border rounded p-4 w-full max-w-md bg-gray-300"
     >
-      <li
+      <PeopleItem
         v-for="(person, index) in listFiltered"
-        :key="index"
-        class="space-x-2 flex items-center justify-between p-1 border rounded bg-white border-gray-400"
-      >
-        <span>{{ person.name }} - {{ person.age }}</span>
-        <button class="text-red-500" @click="removePerson(index)">
-          <FontAwesomeIcon :icon="faTrash" />
-        </button>
-      </li>
+        :key="index + person.name"
+        :person="person"
+        :onRemove="() => removePerson(index)"
+      />
     </ul>
   </div>
 </template>
